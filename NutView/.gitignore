@@ -1,0 +1,13 @@
+.DS_Store
+/.build
+/Package.resolved
+/Packages
+/*.xcodeproj
+
+# Mac OS
+.DS_Store
+
+# Squirrel
+Public
+Storage
+MySecondCustomDir
