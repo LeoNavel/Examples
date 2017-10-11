@@ -30,6 +30,8 @@ server.route(get: "/") { () -> Any in
         ifStatements,
         forStatements
     ]
+
+    // Thanks to Squirrel we can return view without calling .getContent()
     return try View(name: "Index", with: pages)
 }
 
@@ -38,7 +40,10 @@ server.route(get: "/Examples/\(ifStatements.id)") {
         "name": "Tom",
         "age": 22
     ]
-    return try View(name: "Examples.\(ifStatements.id)", with: data)
+    // Here we store content before we show it to user
+    let view = try View(name: "Examples.\(ifStatements.id)", with: data)
+    let content = try view.getContent()
+    return content
 }
 
 server.route(get: "/Examples/\(forStatements.id)") {
@@ -51,7 +56,8 @@ server.route(get: "/Examples/\(forStatements.id)") {
         ]
 
     ]
-    return try View(name: "Examples.\(forStatements.id)", with: data)
+    let view = try View(name: "Examples.\(forStatements.id)", with: data)
+    return try view.getContent()
 }
 
 server.route(get: "/Examples/\(expressions.id)") {
@@ -66,7 +72,9 @@ server.route(get: "/Examples/\(expressions.id)") {
         ]
     ]
 
-    return try View(name: "Examples.\(expressions.id)", with: data)
+    let view = try View(name: "Examples.\(expressions.id)", with: data)
+    let content = try view.getContent()
+    return content
 }
 
 server.route(get: "/Examples/\(datesExample.id)") {
