@@ -2,8 +2,6 @@ import Squirrel
 import NutView
 import Foundation
 
-let server = Server()
-
 NutConfig.nuts = "MyCustomDir/NutFiles"
 NutConfig.fruits = "MySecondCustomDir/FruitFiles"
 
@@ -22,6 +20,8 @@ let ifStatements = Page(name: "If statements", id: "IfStatements")
 let forStatements = Page(name: "For statements", id: "ForStatements")
 let expressions = Page(name: "Expressions", id: "Expressions")
 let datesExample = Page(name: "Dates", id: "Dates")
+
+let server = Server()
 
 server.route(get: "/") { () -> Any in
     let pages = [
@@ -54,8 +54,8 @@ server.route(get: "/Examples/\(forStatements.id)") {
             "Janny": 4500,
             "Millie": 5000
         ]
-
     ]
+
     let view = try View(name: "Examples.\(forStatements.id)", with: data)
     return try view.getContent()
 }
